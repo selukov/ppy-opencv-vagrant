@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
 
-  config.vm.hostname = "ppy-opencv"
+  config.vm.hostname = "opencv-book"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -39,6 +39,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false
   config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+  config.ssh.compression = false
+
+
+  config.vm.synced_folder "Gary Bradski/", "/home/vagrant/Gary Bradski"
+  config.vm.synced_folder "Datta Samyak/", "/home/vagrant/Datta Samyak"
+  config.vm.synced_folder "Gloria Bueno/", "/home/vagrant/Gloria Bueno"
+
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -50,13 +58,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
     # Don't boot with headless mode
     # vb.gui = true
   
     # Use VBoxManage to customize the VM. For example to change memory:
-    # vb.customize ["modifyvm", :id, "--memory", "2048"]
-  # end
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--cpus", "4"]
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -126,4 +135,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.validation_client_name = "ORGNAME-validator"
 
   config.vm.provision "shell", path: "bootstrap.sh"
+  system("echo *")   # Печатается список всех файлов.
+  system("echo","Привет мир!") # Печатается звездочка (расширение
+                     # имени файла не производится).
+
 end

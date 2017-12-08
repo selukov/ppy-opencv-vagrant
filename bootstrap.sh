@@ -1,10 +1,18 @@
 #!/bin/bash
 
+#apt-get install linux-image-extra-$(uname -r)
+
 PPA_REPOSITORIES=(
     'ppa:jon-severinsson/ffmpeg'
+    'ppa:rvm/testing'
+    'ppa:mc3man/mpv-tests'
 )
 
 PKG_DEPENDENCIES=(
+	'mpv'
+    'smplayer'
+    'youtube-dl'
+    'smtube'
     'python-setuptools'
     'python-dev'
     'build-essential'
